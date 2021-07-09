@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import drone_image from '../../assets/images/sample_drone_image.jpg';
 import {Link} from 'react-router-dom';
+import { AuthCheck } from 'reactfire';
 // New Make Styles Code
 const useStyles = makeStyles({
     root:{
@@ -64,7 +65,7 @@ export const Home = ( props:Props ) => {
 
     return(
         <div className={classes.root}>
-            {/* New and Updated HTML Code */}
+            {/* not so New and Updated HTML Code */}
             <nav>
                 <div className={classes.navbar_container}>
                     <h1 className={ `${classes.logo}` } >
@@ -74,12 +75,19 @@ export const Home = ( props:Props ) => {
                         <li>
                             <Link to='/' className={classes.nav_a}>Home</Link>
                             </li>
-                        <li>
-                            <Link to='/dashboard' className={classes.nav_a}>Dashboardt</Link>
-                            </li>
+                        {/* Adding Authenticaton */}
+                        <AuthCheck fallback={
                         <li>
                             <Link to='/signin' className={classes.nav_a}>Sign In</Link>
                             </li>
+                        }>
+                        <li>
+                            <Link to='/dashboard' className={classes.nav_a}>Dashboard</Link>
+                            </li>
+                            <li>
+                            <Link to='/signin' className={classes.nav_a}>Sign Out</Link>
+                            </li>
+                            </AuthCheck>
                     </ul>
                 </div>
             </nav>

@@ -36,7 +36,7 @@ export const server_calls = {
 
     update: async (id:string, data: any = {}) => {
         const response = await fetch(`https://drone-inventory-tm.herokuapp.com/api/drones/${id}`,{
-            method: 'POST',
+            method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
                 'x-access-token': `Bearer ${token}`
@@ -44,15 +44,11 @@ export const server_calls = {
             body: JSON.stringify(data)
         });
 
-        if (!response.ok){
-            throw new Error('Failed to UPDATE data from server')
-        }
-
-        return await response.json()
+       console.log(response)
     },
 
     delete: async (id:string ) => {
-        const response = await fetch(`https://drone-inventory-tm.herokuapp.com/api/drones${id}`,{
+        const response = await fetch(`https://drone-inventory-tm.herokuapp.com/api/drones/${id}`,{
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
